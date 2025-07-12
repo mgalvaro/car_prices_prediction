@@ -16,4 +16,4 @@ data/
 # OS
 .DS_Store
 Thumbs.db
-src/RandomForest_model.pkl
+# src/RandomForest_model.pkl
