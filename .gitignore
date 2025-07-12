@@ -1,0 +1,19 @@
+# Jupyter
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*.env
+
+# Environments
+.venv/
+
+# Data & outputs
+data/
+# outputs/
+
+# OS
+.DS_Store
+Thumbs.db
+src/RandomForest_model.pkl
