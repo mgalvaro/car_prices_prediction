@@ -16,4 +16,5 @@ data/
 # OS
 .DS_Store
 Thumbs.db
+*passwords.py
 # src/RandomForest_model.pkl

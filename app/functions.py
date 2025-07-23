@@ -4,19 +4,27 @@ import plotly.express as px
 import streamlit as st
 
 
-def plot_numeric_or_categ(df, variable, cat, target="price"):
+def plot_numeric_or_categ(df, variable, cat, target="price", hue=None):
     """Plots a histogram, a boxplot and a scatterplot for numerical variables
     and a barplot for categorical variables distribution"""
 
     # for numerical values
     if cat == 0:
         fig_hist = px.histogram(
-            df, x=variable, nbins=50, title=f"Distribution of {variable}"
+            df,
+            x=variable,
+            nbins=50,
+            title=f"Histogram: distribution of {variable}",
+            color=hue,
         )
         fig_scat = px.scatter(
-            df, x=variable, y=target, title=f"Scatterplot of {variable} vs. {target}"
+            df,
+            x=variable,
+            y=target,
+            title=f"Scatterplot of {variable} vs. {target}",
+            color=hue,
         )
-        fig_box = px.box(df, x=variable, title=f"Boxplot of {variable}")
+        fig_box = px.box(df, x=variable, title=f"Boxplot of {variable}", color=hue)
         return fig_hist, fig_scat, fig_box
 
     # categorigal values
@@ -153,3 +161,20 @@ def statistics(df, column):
     )
 
     return summary_df
+
+
+def data_showing(emiss, transm, body):
+
+    show_dict = {
+        "Emission Labels": emiss,
+        "Transmission Types": transm,
+        "Body Types": body,
+    }
+
+    string = "*Plotting data for: "
+
+    for k, v in show_dict.items():
+        if len(v) != 0:
+            string += f"{k}: {v} || "
+
+    return string
