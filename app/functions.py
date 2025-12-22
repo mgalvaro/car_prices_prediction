@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import plotly.express as px
+import joblib
 import streamlit as st
 
 
@@ -178,3 +179,63 @@ def data_showing(emiss, transm, body):
             string += f"{k}: {v} || "
 
     return string
+
+
+# ML function to run the model
+def run_model(car_age, power_hp, mileage_km, transmission_auto):
+    # Calculate required features
+    log_power_hp = np.log1p(power_hp)
+    log_mileage_km = np.log1p(mileage_km)
+    transmission_auto_binary = 1 if transmission_auto == "Automatic" else 0
+
+    # Build input array
+    input_array = np.array(
+        [[car_age, transmission_auto_binary, log_power_hp, log_mileage_km]]
+    )
+
+    # Load model
+    model = joblib.load("../outputs/reduced_RF_model.pkl")
+
+    # Predict log price
+    predicted_log_price = model.predict(input_array)[0]
+
+    # Convert back to price
+    predicted_price = np.expm1(predicted_log_price)
+
+    return predicted_price
+
+
+def social_icons(linkedin_user, github_user):
+    linkedin_url = f"https://www.linkedin.com/in/{linkedin_user}"
+    github_url = f"https://github.com/{github_user}"
+
+    st.markdown(
+        f"""
+        <style>
+            .social-icons {{
+                display: flex;
+                justify-content: left;
+                gap: 20px;
+            }}
+            .social-icons img {{
+                width: 20px;
+                transition: filter 0.3s ease;
+            }}
+            @media (prefers-color-scheme: dark) {{
+                .social-icons img.github {{
+                    filter: invert(1);
+                }}
+            }}
+        </style>
+
+        <div class="social-icons">
+            <a href="{linkedin_url}" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png">
+            </a>
+            <a href="{github_url}" target="_blank">
+                <img class="github" src="https://cdn-icons-png.flaticon.com/512/25/25231.png">
+            </a>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )

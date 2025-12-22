@@ -4,7 +4,6 @@ import streamlit as st
 import plotly.express as px
 from config import PAGE_CONFIG
 from functions import *
-import io
 
 
 def main():
@@ -93,9 +92,16 @@ def main():
             mime="text/csv",
         )
 
+    # TABS ----------------------------------------------------------------------------------------
     # set the tabs
-    tab1, tab2, tab3 = st.tabs(
-        ["📉 Distributions", "📛 NaN's & Outliers", "✨ Correlations"]
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(
+        [
+            "📉 Distributions",
+            "📛 NaN's & Outliers",
+            "✨ Correlations",
+            "🧠 Price Prediction",
+            "ℹ️ About",
+        ]
     )
 
     # decide if the column contains numeric or categorical data
@@ -216,6 +222,91 @@ def main():
                 zmax=1,
             )
             st.plotly_chart(fig_corr, use_container_width=True)
+
+    with tab4:
+
+        st.markdown("## 🚗 Predict your car price")
+        st.markdown(
+            """
+                    The model only requires 4 features:
+                    <ul>
+                    <li><strong>Car Age</strong>, in years</li>
+                    <li><strong>Transmission (Automatic or Manual)</strong></li>
+                    <li><strong>Power (HP)</strong></li>
+                    <li><strong>Mileage (km)</strong></li>
+                    </ul>
+                    """,
+            unsafe_allow_html=True,
+        )
+
+        min_max = pd.read_csv("../data/top4_min_max.csv")
+        with st.expander(label="Make sure your data are within this values"):
+            st.dataframe(data=min_max)
+
+        # widgets
+        car_age = st.number_input(
+            "Car Age (in years)",
+            min_value=min_max.loc[0, "car_age"],
+            max_value=min_max.loc[1, "car_age"],
+            value=5,
+        )
+        transmission_auto = st.selectbox("Transmission Type", ["Manual", "Automatic"])
+        power_hp = st.number_input(
+            "Power (in HP)",
+            min_value=min_max.loc[0, "power_hp"],
+            max_value=min_max.loc[1, "power_hp"],
+            value=120.0,
+            step=5.0,
+        )
+        mileage_km = st.number_input(
+            "Mileage (in km)",
+            min_value=1.0,
+            max_value=min_max.loc[1, "mileage_km"],
+            value=30000.0,
+            step=1000.0,
+        )
+
+        if st.button("📈 Predict Price"):
+
+            try:
+                pred_price = run_model(car_age, power_hp, mileage_km, transmission_auto)
+                st.success(f"The predicted price is {round(pred_price, 2)} €")
+
+            except:
+                st.error("Something went wrong!")
+
+    with tab5:
+
+        st.markdown("# About the project")
+        st.markdown(
+            """
+            - This is an improved version of one of the multiple tasks carried out during the HACK A BOSS bootcamp.
+                    
+            - The model was developed following the process documented in the notebooks.
+                    
+            - The training was performed on half of the dataset due to resources limitations.
+                    
+            - The model has the following metrics:"""
+        )
+        st.dataframe(data=pd.read_csv("../outputs/metrics_red_model.csv"))
+
+        st.markdown("# Disclamer")
+        st.markdown(
+            """This model is the result of a practical exersice. The author takes no responsibility for it's use.
+            The model was developed with data scrapped in 2024. It might not be accurate today!"""
+        )
+
+        st.divider()
+
+        st.markdown("# About me")
+        st.markdown(
+            """
+                    My name's Álvaro Mejía. I started exploring the Data Science and Machine Learning worldalmost 2 years ago.
+
+                    I enjoy exploring data, getting insights and building ML models. Take a look to my profiles:
+                    """
+        )
+        social_icons("alvaro-mejia-garcia", "mgalvaro")
 
 
 if __name__ == "__main__":
