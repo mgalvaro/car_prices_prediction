@@ -1,4 +1,3 @@
-GitHub README (clear, concise, technical-friendly)
 🚗 Car Price Prediction & Exploratory Data Analysis
 
 Author: Álvaro Mejía
