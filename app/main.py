@@ -241,7 +241,9 @@ def main():
             unsafe_allow_html=True,
         )
 
-        min_max = pd.read_csv("../data/top4_min_max.csv")
+        # to run in local, uncomment:
+        # min_max = pd.read_csv("../data/top4_min_max.csv")
+        min_max = pd.read_csv("data/top4_min_max.csv")
         with st.expander(label="Make sure your data are within this values"):
             st.dataframe(data=min_max)
 
@@ -290,7 +292,9 @@ def main():
                     
             - The model has the following metrics:"""
         )
-        st.dataframe(data=pd.read_csv("../outputs/metrics_red_model.csv"))
+
+        # in local: st.dataframe(data=pd.read_csv("../outputs/metrics_red_model.csv"))
+        st.dataframe(data=pd.read_csv("outputs/metrics_red_model.csv"))
 
         st.markdown("# Disclamer")
         st.markdown(
