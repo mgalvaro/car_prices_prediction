@@ -10,7 +10,8 @@ __pycache__/
 .venv/
 
 # Data & outputs
-data/
+data/*
+!data/data_formatted.csv
 # outputs/
 
 # OS
