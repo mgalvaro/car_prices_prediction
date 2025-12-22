@@ -11,8 +11,10 @@ def main():
     st.set_page_config(**PAGE_CONFIG)
     st.title("📊 Preliminary EDA")
 
-    # load the data
-    df = pd.read_csv("../data/data_formatted.csv")
+    # load the data in Streamlit
+    df = pd.read_csv("data/data_formatted.csv")
+    # to run in local, uncomment this line:
+    # df = pd.read_csv("../data/data_formatted.csv")
 
     # get categorical variables
     categ_var = df.select_dtypes(include="object").columns.tolist() + [
