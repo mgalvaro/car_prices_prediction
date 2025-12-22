@@ -1,7 +1,9 @@
 🚗 Car Price Prediction & Exploratory Data Analysis
 
 Author: Álvaro Mejía
+
 Project Type: Data Science · Machine Learning · EDA · Streamlit App
+
 Status: Complete (future deployment improvements planned)
 
 📌 Project Overview
