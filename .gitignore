@@ -12,6 +12,7 @@ __pycache__/
 # Data & outputs
 data/*
 !data/data_formatted.csv
+!top4_min_max.csv
 # outputs/
 
 # OS
