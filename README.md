@@ -1,4 +1,4 @@
-🚗 Car Price Prediction & Exploratory Data Analysis
+#🚗 Car Price Prediction & Exploratory Data Analysis
 
 Author: Álvaro Mejía
 
@@ -6,7 +6,7 @@ Project Type: Data Science · Machine Learning · EDA · Streamlit App
 
 Status: Complete (future deployment improvements planned)
 
-📌 Project Overview
+##📌 Project Overview
 
 This project aims to analyze, explore, and predict car prices using real-world vehicle listing data.
 It is an improved and extended version of a project originally developed during the HACKABOSS Data Science bootcamp, with a strong focus on:
@@ -17,7 +17,7 @@ It is an improved and extended version of a project originally developed during 
 - Model interpretability and practical constraints
 - A professional Streamlit dashboard for interactive data exploration and price estimation
 
-🎯 Objectives
+##🎯 Objectives
 
 - Understand the structure and quality of car market data
 - Detect and analyze outliers and missing values
@@ -26,7 +26,7 @@ It is an improved and extended version of a project originally developed during 
 - Build an interactive EDA app suitable for technical stakeholders
 - Integrate a trained ML model into the Streamlit app
 
-🧠 Key Steps
+##🧠 Key Steps
 
 1. Data Cleaning & Feature Engineering
 
@@ -73,7 +73,7 @@ It is an improved and extended version of a project originally developed during 
 - Download filtered datasets
 - Model usage tab: users can estimate car price using the trained model
 
-🛠️ Tools & Tech Stack
+##🛠️ Tools & Tech Stack
 
 - Python
 - Pandas, NumPy
@@ -82,10 +82,11 @@ It is an improved and extended version of a project originally developed during 
 - Streamlit
 - Git & GitHub
 
-⚠️ Notes & Limitations
+##⚠️ Notes & Limitations
 
-The trained model is relatively large due to ensemble methods.
+The data were retrieved in 2025, so the model might not be realistic at the moment.
+
+The model training was performed on half of the data, due to computational limitations, optimizing performance and computational time.
 
 Deployment via FastAPI/Docker is planned as a future improvement.
 
-Model training was optimized to balance computation time and performance.
